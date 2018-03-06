@@ -1,0 +1,203 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{amssymb}
+\numberwithin{equation}{section}
+
+\begin{document}
+    
+    \begin{center}
+        {\Large МОСКОВСКИЙ ГОСУДАРСТВЕННЫЙ УНИВЕРСИТЕТ\\
+        имени М.В. ЛОМОНОСОВА\\
+        МЕХАНИКО-МАТЕМАТИЧЕСКИЙ ФАКУЛЬТЕТ}
+    \end{center} 
+    
+    \vspace{4cm}
+    \begin{center}
+        {\LARGE {\bf A. В. Чашкин}}
+    \end{center}
+    
+    \begin{center}
+        {\LARGE \bf{ЛЕКЦИИ\\
+        ПО ДИСКРЕТНОЙ МАТЕМАТИКЕ}}
+    \end{center}
+    
+    \begin{center}
+         {\bf Учебное пособие}
+    \end{center}
+    \newpage
+    
+    \tableofcontents
+    \newpage
+    
+    \section{Число неприводимых многочленов}
+    
+    Применим метод производящих функций для нахождения числа неприводимых многочленов над полем $\mathbb{Z}_p$.
+    Число неприводимых многочленов степени~$n$, укоторых коэффициент при старшей степени равен единице, обозначим через $P(n)$.
+    
+    \newtheorem{Lem}{Лемма}
+    \begin{Lem}
+       Для последовательности $P(n)$ справедливо рекуррентное равенство
+       \label{lem.1}
+    \end{Lem}
+    
+    \begin{equation}
+        p^n = \sum_{m|n} m P(m).
+        \label{eq.1}
+    \end{equation}
+    
+    {\LargeДоказательство}.
+    Пусть $p_{1m}, p_{p2m}, \cdots ,p_{P(m)m}$ --- все неприводимые многочлены степени $m$.
+    Нетрудно видеть, что, раскрывая скобки в произведении
+    
+    \begin{equation}
+        \prod_{m=1}^\infty \prod_{k=1}^{P(m)} \Bigl(1+p_{km}+(p_{km})^2+\cdots+(p_{km})^l+\dots \Bigl),
+        \label{eq.2}
+    \end{equation}
+    
+    \noindent получим сумму $\sum$ всевозможных произведений неприводимых многочленов, причем каждое произведение встретится в этой сумме ровно один раз.
+    Так как каждый многочлен единственным образом раскладывается в произведение неприводимых многочленов,
+    то в $\sum$ будет содержаться ровно $p^n$ произведений степени $n$. 
+    Каждому неприводимому многочлену степени $m$ поставим в соответствие одночлен $x^m$, а произведению~\eqref{eq.2} --- произведение
+    
+    \begin{equation}
+        \prod_{m=1}^\infty \prod_{k=1}^{P(m)} \Bigl(1+x^m+(x^m)^2+\cdots+(x^km)^l+\dots \Bigl)
+        =\prod_{m=1}^\infty \left(\frac{1}{1-x^n}\right)^{P(m)}.
+        \label{eq.3}
+    \end{equation}
+    
+    \noindent Так как существует ровно $p^n$ многочленов степени $n$, укоторых коэффициент при $x^n^$ равен единице,
+    то легко видеть, что в ряду, получившемся после раскрытия скобок в~\eqref{eq.3}, коэффициент при $x^n^$ будет равен $p^n$. Следовательно,
+    
+    \begin{equation}
+    \frac1{1-px} = \prod_{m=1}^\infty \left(\frac{1}{1-x^n}\right)^{P(m)}.
+        \label{eq.4}
+    \end{equation}
+    
+    \noindent Логарифмируя правую и левую части~\eqref{eq.4}, получим новое равенство
+    
+    \begin{equation}
+        \ln \frac1{1-px} = \sum_{m=1}^\infty P(m) \ln \frac1{1-x^n}.
+        \notag
+    \end{equation}
+    
+    \newpage
+    \noindent Теперь, применяя формулу $\ln \frac1{1-x} = \sum_{n=1}^\infty \frac1n x^n$, разложим в ряд правую и левую части последнего равенства:
+
+    \[
+        \sum_{n=1}^\infty \frac1n p^n x^n = \sum_{m=1}^\infty \sum_{k=1}^\infty \frac1k P(m) x^{km} = \sum_{n=1}^\infty \left(\sum_{km=n} \frac1k P(m) \right) x^n.
+    \]
+    
+    \noindent Приравнивая в получившемся равенстве коэффициенты при $n$-й степени $x$, находим
+    
+    \[
+        \frac1n p^n = \sum_{km=n} \frac1k P(m) = \sum_{m\,|\,n}  \frac mn P(m).
+    \]
+    
+    \noindent Лемма доказана.
+    
+    \vspace{5mm} \noindent Для того, чтобы из равенства~\eqref{eq.1} в явном виде выразить функцию $P(n)$ воспользуемся формулой обращения Мебиуса,
+    которую докажем далее в лемме~\eqref{lem.3}. Сначала определим функцию Мебиуса
+    
+    \[
+        \mu(m) = 
+        \begin{cases}
+            1, & \text{если $n=1$;} \\
+            (-1)^k, & \text{если $n$ --- произведение $k$ простых чисел;}\\
+            0, & \text{если $n$ делится на квадрат простого числа,}
+        \end{cases}
+    \]
+    
+    \noindent и покажем, что имеет место следующее утверждение.
+    
+    \newtheorem{Lem}{Лемма}
+       \begin{Lem}
+           Справедливо равенство
+       \label{lem.2}
+    \end{Lem}
+    
+     \begin{equation}
+        \sum_{m|n} = 
+        \begin{cases}
+            1, & \text{если $n=1$;} \\
+            0, & \text{если $n>0$.}
+        \end{cases}
+        \label{eq.5}
+    \end{equation}
+    
+    {\LargeДоказательство}.
+    Если $n=1$, то единица является единственным делителем, и, следовательно, $\mu(1) = 1$.
+    При $n>1$ представим $n$ в виде произведения простых чисел:$n=p^{q_1}_1 \cdots p^{q_r}_r$. 
+    Легко видеть, что в сумме \eqref{eq.5} нужно учитывать только делители без кратных множителей. 
+    Поэтому
+    
+    \[
+        \sum_{m|n} \mu(m) = \sum_{k=0}^r \,\, \sum_{1\le i_1<\cdots<i_k\le r} \mu(p_{i_1} \cdots p_{i_k}) = \sum_k^r = \sum \dbinom rk (-1)^k = 0.
+    \]
+    
+    \noindent Лемма доказана.
+    
+    \newpage
+    
+    \newtheorem{Lem}{Лемма}
+    \begin{Lem}
+        Функци $f(n)$ и $h(n)$, определенные на множестве целых положительных чисел, удовлетворяют равенству
+        
+        \begin{equation}
+            f(n) = \sum_{m|n}h(m) \textit{\hspace{8mm} при всех } n\in \mathbb{N}
+        \label{eq.6}
+        \end{equation}
+        
+        тогда и только тогда, когда
+        
+        \begin{equation}
+            f(n) = \sum_{m|n} \mu (\frac nm) f(m) \textit{\hspace{8mm} при всех } n\in \mathbb{N}
+        \label{eq.7}
+        \end{equation}
+        
+    \label{lem.3}
+    \end{Lem}
+    
+    {\LargeДоказательство}.
+    Покажем, что из~\eqref{eq.6} следует\eqref{eq.7}. 
+    Для этого прежде всего заметим, что
+    
+    \[
+       \sum_{m|n} \mu (\frac nm) f(m) = \sum_{m|n} \mu(m) f(\frac nm),
+    \]
+    
+    \noindent так как суммы, стоящие в обеих частях равенства, отличаются только порядком следования слагаемых.
+    Затем в правую часть последнего равенства вместо $f(m)$ подставим правую часть равенства~\eqref{eq.6}.
+    Меняя в получившейся двойной сумме порядок суммирования и применяя лемму~e\eqref{lem.1}, получим следующую цепочку равенств:
+    
+    \[
+        \begin{split}
+            \sum_{m|n} \mu(m) f(\frac nm) &= \sum_{m|n} \mu(m) \sum_{k|\frac nm} h(k) =\\
+                                          &= \sum_{m|n} \,\,\,\, \sum_{k|\frac nk} \mu(m) h(k) = \sum_{km|n} \mu(m) h(k) =\\
+                                          &= \sum_{k|n} \,\,\,\, \sum_{m|\frac nk} \mu(m) h(k) = \sum_{k|n} h(k) \sum_{m|\frac nk} \mu(m) = h(n).
+        \end{split}
+    \]
+    
+    Таким образом, справедливость равенства~\eqref{eq.7} установлена.
+    Обратное утверждение доказывается аналогично.
+    Лемма доказана.
+    
+    \newtheorem{Th}{Теоркма}
+       \begin{Th}
+           Для числа $P(n)$ неприводимых многочленов степени $n$ справедливо равенство
+           
+               \[
+                   P(n) = \frac 1n \sum_{m|n} \mu(\frac nm) p^m.
+               \]
+           
+       \label{th.1}
+    \end{Th}
+    
+    {\LargeДоказательство}.
+    Из леммы~\eqref{lem.1} следует, что равенство~\eqref{eq.6} леммы~\eqref{lem.3} справедливо при $f(n) = p^n$ и  $h(n) = nP(n)$ для всех натуральных $n$.
+    Поэтому утверждение теоремы следует непосредственно из леммы~\eqref{lem.3}.
+    Теорема доказана.
+
+\end{document}
